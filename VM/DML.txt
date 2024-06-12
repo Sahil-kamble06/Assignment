@@ -1,0 +1,31 @@
+desc employee;
+drop table employee;
+
+create table employee(
+id number(10),
+name varchar2(30),
+salary number(10,2),
+dept varchar2(30),
+age number(10)
+)
+
+insert into employee values (101,'RAM',25864,'dev',25)
+insert into employee values (102,'SAM',5369,'test',23)
+insert into employee (id,name,age) values (103,'xyz',23)
+insert into employee values (103,'lily',15743,'Dev',30);
+insert into employee values (104,'zee',34623,'test',29);
+insert into employee values (105,'Abc',25000,'dev',26);
+insert into employee values (106,'Mohit',10000,'test',28);
+
+update employee set salary=35000,dept='HR' where id=103
+update employee set dept='HR' where id>=102
+
+delete from employee where id=103
+Select * from employee
+select id,name,salary ,salary+1000 "Bonus",salary/30 "Perday salary" from employee
+select * from employee where age>=25
+
+select * from employee where dept='hr'
+
+select * from employee where age>=25 and dept='test'
+select * from employee where age>=25

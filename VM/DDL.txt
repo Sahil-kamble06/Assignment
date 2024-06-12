@@ -1,0 +1,18 @@
+create table employee
+(
+ id number(20),name varchar2(40),age number(10)
+)
+
+describe employee;
+
+rename employee to emp;
+rename emp to employee;
+ 
+alter table employee add (salary number(20),email varchar2(20),mobile number(10))
+
+alter table employee drop column mobile
+alter table employee drop  (salary,email)
+
+alter table employee rename column age to empage;
+alter table employee modify (name varchar2(20));
+truncate table employee
