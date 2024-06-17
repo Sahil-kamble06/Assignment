@@ -1,0 +1,101 @@
+select round (194.567) from dual
+select round (194.467) from dual
+
+select trunc(194.567) from dual
+select trunc (194.567,2) from dual
+
+select mod (3,2) from dual
+
+select id , name ,concat('Welcome ',name)from employee
+select id , name ,concat(id ,name)from employee
+select id , name ,length(name)from employee
+
+select id , name ,instr(name,'a')from employee
+select lpad(194,10,'-') from dual
+select rpad(194,10,'-') from dual
+
+
+select replace('abc','a','x') from dual
+select id , name ,replace(name,'a','x')from employee
+select id , name ,upper(name),lower(name),initcap(name) from employee
+
+alter table employee add(DOB date)
+update employee set DOB='12-jan,1999' where id=101
+update employee set DOB='11-feb,1998' where id=102
+update employee set DOB='23-oct,1997' where id=103
+update employee set DOB='21-jun,1996' where id=104
+update employee set DOB='1-aug,2000' where id=105
+update employee set DOB='5-may,1995' where id=106
+update employee set DOB='18-mar,2001' where id=107
+update employee set DOB='15-feb,1998' where id=108
+update employee set DOB='19-nov,1997' where id=109
+update employee set DOB='30-dec,1998' where id=110
+
+select * from employee
+
+select sysdate from dual
+select sysdate+1 from dual
+select sysdate+5 from dual
+select sysdate-2 from dual
+select id , name ,dob, round((sysdate-dob))from employee
+select id , name ,dob, round((sysdate-dob)/365)"AGE" from employee
+select id , name ,dob, round((sysdate-dob)/365)"AGE" from employee
+order by round((sysdate-dob)/365)
+
+select add_months(sysdate,2) from dual
+select next_day(sysdate,'saturday') from dual
+select last_day(sysdate) from dual
+select id, name,dob to_char(dob,'DAY MONTH YYYY') from employee
+
+select to_char (sysdate,'DD MM YYYY HH MI') from dual
+
+
+create table emp4
+(
+id number(10),
+name varchar2(20),
+dept varchar2(10)
+);
+
+insert into emp4 values(1,'roy','dev')
+insert into emp4 values(2,'lily','hr')
+insert into emp4 values(3,'zee','test')
+
+select * from emp4
+commit
+insert into emp4 values(4,'abc','dev')
+insert into emp4 values(5,'pqr','test')
+rollback
+
+select id, name, dept, salary, count(name) over (partition by dept) from employee
+select * from employee
+
+select id, name, dept, salary, rank() over (order by salary desc ) from employee
+
+select id, name, dept, salary, sum(salary) over (partition by dept) from employee
+
+select id, name, dept, salary, dense_rank() over (order by salary ) from employee
+
+select * from (select id, name, dept, salary, rank() over (order by salary desc )as emprank from employee) where emprank=3 
+
+create view demview as
+select id, name from employee where dept='dev'
+select * from demview
+
+create sequence empid
+start with 1000 increment by 1
+
+create table emp11
+(
+id number(10),
+name varchar2(20),
+dept varchar2(10)
+);
+
+insert into emp11 values(empid.nextval,'roy','dev')
+insert into emp11 values(empid.nextval,'lily','hr')
+insert into emp11 values(empid.nextval,'zee','test')
+
+select * from emp11
+
+create index ind on emp11(name)

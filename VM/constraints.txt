@@ -1,0 +1,141 @@
+create table emp
+(
+id number(10) primary key,
+name varchar2(40) not null,
+age number(10)
+)
+
+insert into emp values(1,'ram',23)
+insert into emp values(1,'sam',23)
+insert into emp values(2,'sam',25)
+
+select * from emp
+
+create table emp2
+(
+id number(10) primary key,
+name varchar2(40) not null,
+age number(10) check(age>22),
+dept varchar2(30) default 'trainee',
+email varchar2(30) unique,
+contact number(10) unique
+)
+
+desc emp2
+
+insert into emp2 values(1,'ram',23,'dev','ram@xyz.com',12345)
+insert into emp2 values(2,'sam',23,'test','sam@xyz.com',2345)
+insert into emp2 values(3,'mayur',21,'dev','mayur@xyz.com',345)
+insert into emp2 values(3,'mayur',24,'dev','mayur@xyz.com',345)
+insert into emp2 (id,name,age,email,contact) values(4,'lily',28,'lily@xyz.com',456)
+insert into emp2 values(5,'rose',27,'test','rose@xyz.com',678)
+
+select * from emp2
+
+create table dept
+(
+id number(10) primary key,
+name varchar2(30) not null,
+manager varchar2(20)
+)
+
+insert into dept values(101,'dev','mohit')
+insert into dept values(102,'test','roy')
+insert into dept values(103,'hr','xyz')
+
+select * from dept
+
+create table emp
+(
+id number(10) primary key,
+name varchar2(40) not null,
+age number(10)
+)
+
+drop table emp
+desc emp
+
+
+create table emp
+(
+id number(10) primary key,
+name varchar2(40) not null,
+age number(10),
+salary number(20),
+deptid number(10),
+constraint fk foreign key(deptid) references dept(id) on delete set null
+)
+
+insert into emp values(1,'ram',23,10000,101)
+insert into emp values(2,'sam',23,20000,101)
+insert into emp values(3,'mayur',21,35000,103)
+
+insert into emp values(4,'lily',28,4300,102)
+insert into emp values(5,'rose',27,6000,102)
+
+select * from emp
+delete from dept where id =103
+select * from emp where name like's%'
+select * from emp where name like'%s'
+select * from emp where name like'_a%'
+
+select * from emp where salary >(select salary from emp where name='sam')
+select * from emp where salary >any (select salary from emp where deptid=103)
+
+select * from emp 
+inner join dept
+on emp.deptid= dept.id
+
+
+select * from emp 
+left outer join dept
+on emp.deptid= dept.id
+
+select * from emp 
+right outer join dept
+on emp.deptid= dept.id
+
+select * from emp 
+full outer join dept
+on emp.deptid= dept.id
+
+select e.id,e.name,e.salary,d.name,d.manager
+from emp e
+inner join dept d
+on e.deptid= d.id
+
+select * from emp 
+cross join dept
+
+create table chenoff
+(
+id number(10),
+name varchar2(20),
+dept varchar2(10)
+)
+
+create table bangoff
+(
+id number(10),
+name varchar2(20),
+dept varchar2(10)
+)
+
+insert into chenoff values (1,'ram','dev')
+insert into chenoff values (2,'sam','dev')
+insert into chenoff values (3,'roy','test')
+insert into chenoff values (4,'mohit','hr')
+
+insert into bangoff values (1,'ram','dev')
+insert into bangoff values (2,'xyz','dev')
+insert into bangoff values (3,'suresh','test')
+insert into bangoff values (4,'mohit','hr')
+
+select * from bangoff
+select * from chenoff
+
+select * from bangoff 
+union select * from chenoff
+
+select * from bangoff 
+union all select * from chenoff

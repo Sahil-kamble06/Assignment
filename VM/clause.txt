@@ -1,0 +1,27 @@
+select * from employee
+
+select dept, count(id) from employee group by dept
+
+select max(salary)"MAX",min(salary)"MIN" from employee
+
+select dept, count(id), sum(salary)"SUM",max(salary)"MAX",min(salary)"MIN" from employee group by dept
+
+insert into employee values(107,'lily',6700,'admin',22)
+insert into employee values(108,'rohit',45000,'hr',28)
+insert into employee values(109,'saurbh',12000,'test',32)
+insert into employee values(110,'phiu',45708,'dev',23)
+ 
+select dept, count(id) from employee group by dept order by count(id) desc
+
+select dept, count(id) from employee 
+group by dept 
+having count(id) <110 
+order by count(id) desc
+
+TASK
+select dept,min(salary)"MIN" from employee 
+group by dept 
+having min(salary)<40000
+order by  min(salary)
+
+
